@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    
+
    @include('frontend.body.header')
     <!--End header-->
 
@@ -77,7 +77,7 @@
             <option value="2026">2026</option>
         </select>
     </div>
- 
+
 
     <div class="form-group">
         <input required=""  id="password"  type="password" name="password" placeholder="Password" />
@@ -85,8 +85,8 @@
     <div class="form-group">
         <input required="" id="password_confirmation" type="password" name="password_confirmation" placeholder="Confirm password" />
     </div>
-     
-   
+
+
     <div class="login_footer form-group mb-50">
         <div class="chek-form">
             <div class="custome-checkbox">

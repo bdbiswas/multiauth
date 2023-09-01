@@ -141,6 +141,16 @@
   </script>
 
   <script>
+    tinymce.init({
+      selector: '#mytextarea'
+
+    });
+    
+  </script>
+
+
+
+  <script>
     
   </script>
 

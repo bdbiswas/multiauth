@@ -66,10 +66,10 @@
           </a>
           <ul>
            
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>All SubCategory</a>
+            <li> <a href="{{route('all.subcategory')}}"><i class="bx bx-right-arrow-alt"></i>All SubCategory</a>
             </li>
            
-            <li> <a href=""><i class="bx bx-right-arrow-alt"></i>Add SubCategory</a>
+            <li> <a href="{{route('add.subcategory')}}"><i class="bx bx-right-arrow-alt"></i>Add SubCategory</a>
             </li>
             
              
@@ -84,16 +84,19 @@
           </a>
           <ul>
             
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>All Product</a>
-            </li>
             
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+            <li> <a href="{{ route('all.product') }}"><i class="bx bx-right-arrow-alt"></i>All Product</a>
             </li>
-        
+           
+           
+            <li> <a href="{{ route('add.product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+            </li>
+           
              
           </ul>
         </li>
        
+        
         <li>
           <a href="javascript:;" class="has-arrow">
             <div class="parent-icon"><i class="lni lni-gallery"></i>
@@ -102,15 +105,19 @@
           </a>
           <ul>
             
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>All Slider</a>
+            <li> <a href="{{ route('all.slider') }}"><i class="bx bx-right-arrow-alt"></i>All Slider</a>
             </li>
-            
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Add Slider</a>
+           
+            <li> <a href="{{ route('add.slider') }}"><i class="bx bx-right-arrow-alt"></i>Add Slider</a>
             </li>
           
              
           </ul>
         </li>
+          
+             
+        
+      
 
 
         <li>
@@ -176,11 +183,10 @@
             <div class="menu-title">Vendor Manage </div>
           </a>
           <ul>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Inactive Vendor</a>
+            <li> <a href="{{ route('inactive.vendor') }}"><i class="bx bx-right-arrow-alt"></i>Inactive Vendor</a>
             </li>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Active Vendor</a>
+            <li> <a href="{{ route('active.vendor') }}"><i class="bx bx-right-arrow-alt"></i>Active Vendor</a>
             </li>
-             
           </ul>
         </li>
        
