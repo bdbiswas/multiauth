@@ -115,13 +115,15 @@
         <a href="#"><span class="lable ml-0">Compare</span></a>
     </div>
 
-                <div class="header-action-icon-2">
-                    <a href="#">
-                        <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
-                        <span class="pro-count blue" id="wishQty">0 </span>
-                    </a>
-                    <a href="#"><span class="lable">Wishlist</span></a>
-                </div>
+    
+
+   <div class="header-action-icon-2">
+        <a href="{{ route('wishlist') }}">
+            <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
+            <span class="pro-count blue" id="wishQty">0 </span>
+        </a>
+        <a href="{{ route('wishlist') }}"><span class="lable">Wishlist</span></a>
+    </div>
 
 
 
@@ -215,8 +217,11 @@
             </div>
         </div>
 
+   
+        @php
 
-
+    $categories = App\Models\Category::orderBy('category_name','ASC')->get();
+        @endphp
 
 
         <div class="header-bottom header-bottom-bg-color sticky-bar">
@@ -234,18 +239,22 @@
 <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
     <div class="d-flex categori-dropdown-inner">
         <ul>
-            
+            @foreach($categories as $item)
+                @if($loop->index < 5)
             <li>
-                <a href=""> <img src="" alt="" />  </a>
+                <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset( $item->category_image ) }}" alt="" /> {{ $item->category_name }} </a>
             </li>
-           
+            @endif
+           @endforeach
         </ul>
         <ul class="end">
-            
+             @foreach($categories as $item)
+             @if($loop->index > 4)
             <li>
-                <a href=""> <img src="" alt="" />  </a>
+                <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset( $item->category_image ) }}" alt="" /> {{ $item->category_name }} </a>
             </li>
-           
+              @endif
+           @endforeach
              
         </ul>
     </div>
@@ -281,19 +290,26 @@
                             
                         </li>
     
-         
-        <li>
-            <a href=""> <i class="fi-rs-angle-down"></i></a>
+         @php
 
-  
+    $categories = App\Models\Category::orderBy('category_name','ASC')->limit(5)->get();
+        @endphp
+
+       @foreach($categories as $category)    
+        <li>
+            <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
+
+   @php 
+    $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name','ASC')->get();
+        @endphp
 
             <ul class="sub-menu">
-                   
-                <li><a href=""></a></li>
-                
+                @foreach($subcategories as $subcategory)   
+                <li><a href="{{ url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug) }}">{{ $subcategory->subcategory_name }}</a></li>
+                @endforeach
             </ul>
         </li>
-       
+        @endforeach
 
 
                          
