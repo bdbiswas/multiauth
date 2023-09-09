@@ -2,17 +2,17 @@
 @section('main')
 
 @section('title')
-    {{ $product->product_name }}
+    {{ $product->product_name }} 
 @endsection
 
 <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
                     <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> <a href="shop-grid-right.html">{{ $product['category']['category_name'] }}</a> <span></span> {{ $product['subcategory']['subcategory_name'] }} <span></span>{{ $product->product_name }}
+                    <span></span> <a href="shop-grid-right.html">{{ $product['category']['category_name'] }}</a> <span></span> {{ $product['subcategory']['subcategory_name'] }} <span></span>{{ $product->product_name }} 
                 </div>
             </div>
-        </div>
+        </div> 
         <div class="container mb-30">
             <div class="row">
                 <div class="col-xl-10 col-lg-12 m-auto">
@@ -34,7 +34,7 @@
 					@foreach($multiImage as $img)
                     <div><img src="{{ asset($img->photo_name) }}" alt="product image" /></div>
                      @endforeach
-
+                  
                 </div>
             </div>
             <!-- End Gallery -->
@@ -46,7 +46,7 @@
             	@else
             	<span class="stock-status out-stock">Stock Out </span>
             	@endif
-
+                
 
 
                 <h2 class="title-detail" id="dpname"> {{ $product->product_name }} </h2>
@@ -59,20 +59,20 @@ $reviewcount = App\Models\Review::where('product_id',$product->id)->where('statu
 
 $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
 @endphp
-
+  
 
                         <div class="product-rate d-inline-block">
        @if($avarage == 0)
-
-       @elseif($avarage == 1 || $avarage < 2)
+      
+       @elseif($avarage == 1 || $avarage < 2)                     
     <div class="product-rating" style="width: 20%"></div>
-       @elseif($avarage == 2 || $avarage < 3)
+       @elseif($avarage == 2 || $avarage < 3)                     
     <div class="product-rating" style="width: 40%"></div>
-       @elseif($avarage == 3 || $avarage < 4)
+       @elseif($avarage == 3 || $avarage < 4)                     
     <div class="product-rating" style="width: 60%"></div>
-       @elseif($avarage == 4 || $avarage < 5)
+       @elseif($avarage == 4 || $avarage < 5)                     
     <div class="product-rating" style="width: 80%"></div>
-       @elseif($avarage == 5 || $avarage < 5)
+       @elseif($avarage == 5 || $avarage < 5)                     
     <div class="product-rating" style="width: 100%"></div>
     @endif
                         </div>
@@ -85,13 +85,13 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                 <div class="clearfix product-price-cover">
  @php
     $amount = $product->selling_price - $product->discount_price;
-    $discount = ($amount/$product->selling_price) * 100;
+    $discount = ($amount/$product->selling_price) * 100; 
     @endphp
 
  @if($product->discount_price == NULL)
 <div class="product-price primary-color float-left">
             <span class="current-price text-brand">${{ $product->selling_price }}</span>
-
+            
         </div>
  @else
 
@@ -104,7 +104,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
         </div>
 
  @endif
-
+         
 
                 </div>
                 <div class="short-desc mb-30">
@@ -143,9 +143,9 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
          </select>
     </div>
 
-
+    
      @endif
-
+    
 
 
                 <div class="detail-extralink mb-50">
@@ -217,7 +217,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
 <div class="tab-pane fade show active" id="Description">
     <div class="">
         <p> {!! $product->long_descp !!} </p>
-
+        
     </div>
 </div>
 <div class="tab-pane fade" id="Additional-info">
@@ -325,7 +325,7 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                 <a href="vendor-details-2.html">{{ $product['vendor']['name'] }}</a>
             </h6>
         	@endif
-
+            
             <div class="product-rate-cover text-end">
                 <div class="product-rate d-inline-block">
                     <div class="product-rating" style="width: 90%"></div>
@@ -347,13 +347,13 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
     </ul>
 
     	@endif
-
+   
     @if($product->vendor_id == NULL)
       <p>Owner Information</p>
     @else
       <p>{{ $product['vendor']['vendor_short_info'] }}</p>
     @endif
-
+  
 </div>
 
 
@@ -372,7 +372,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 
     @if($item->status == 0)
 
-    @else
+    @else 
 
     <div class="single-comment justify-content-between d-flex mb-30">
         <div class="user justify-content-between d-flex">
@@ -410,8 +410,8 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 
 
     @endforeach
-
-
+                  
+                 
                 </div>
             </div>
 
@@ -459,9 +459,9 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
     @guest
     <p> <b>For Add Product Review. You Need To Login First <a href="{{ route('login')}}">Login Here </a> </b></p>
 
-    @else
+    @else 
 
-
+        
         <div class="row">
             <div class="col-lg-8 col-md-12">
        <form class="form-contact comment_form" action="{{ route('store.review') }}" method="post" id="commentForm">
@@ -512,8 +512,8 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
             <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
         </div>
     </div>
-
-
+                        
+                         
                     </div>
                     <div class="form-group">
                         <button type="submit" class="button button-contactForm">Submit Review</button>
@@ -548,7 +548,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
             <div class="product-img product-img-zoom">
                 <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}" tabindex="0">
                     <img class="default-img" src="{{ asset( $product->product_thambnail ) }}" alt="" />
-
+                   
                 </a>
             </div>
             <div class="product-action-1">
@@ -564,7 +564,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
     @endphp
             <div class="product-badges product-badges-position product-badges-mrg">
 
-
+            
 
 
                  @if($product->discount_price == NULL)
@@ -584,7 +584,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
             @if($product->discount_price == NULL)
                      <div class="product-price">
                         <span>${{ $product->selling_price }}</span>
-
+                       
                     </div>
 
                     @else
@@ -600,7 +600,7 @@ $reviews = App\Models\Review::where('product_id',$product->id)->latest()->limit(
 @endforeach
 
 
-
+  
 </div>
                             </div>
                         </div>

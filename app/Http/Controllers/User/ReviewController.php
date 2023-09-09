@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Review;
+use App\Models\Review; 
 use Carbon\Carbon;
 use Auth;
 
@@ -35,9 +35,9 @@ class ReviewController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification); 
 
-    } // End Method
+    } // End Method 
 
 
 
@@ -46,7 +46,7 @@ class ReviewController extends Controller
         $review = Review::where('status',0)->orderBy('id','DESC')->get();
         return view('backend.review.pending_review',compact('review'));
 
-    }// End Method
+    }// End Method 
 
 
     public function ReviewApprove($id){
@@ -58,16 +58,16 @@ class ReviewController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification); 
 
-    }// End Method
+    }// End Method 
 
      public function PublishReview(){
 
         $review = Review::where('status',1)->orderBy('id','DESC')->get();
         return view('backend.review.publish_review',compact('review'));
 
-    }// End Method
+    }// End Method 
 
 
     public function ReviewDelete($id){
@@ -79,10 +79,10 @@ class ReviewController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->back()->with($notification);
+        return redirect()->back()->with($notification); 
 
 
-    }// End Method
+    }// End Method 
 
 
     public function VendorAllReview(){
@@ -92,7 +92,8 @@ class ReviewController extends Controller
         $review = Review::where('vendor_id',$id)->where('status',1)->orderBy('id','DESC')->get();
         return view('vendor.backend.review.approve_review',compact('review'));
 
-    }// End Method
+    }// End Method 
 
 
 }
+ 

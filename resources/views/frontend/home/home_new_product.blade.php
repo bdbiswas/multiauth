@@ -1,7 +1,6 @@
      @php 
     $products = App\Models\Product::where('status',1)->orderBy('id','ASC')->limit(10)->get();
-   
-    $categories = App\Models\Category::orderBy('category_name','ASC')->limit(8)->get();
+    $categories = App\Models\Category::orderBy('category_name','ASC')->get();
     @endphp
 
         <section class="product-tabs section-padding position-relative">
@@ -24,14 +23,7 @@
                     <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                         <div class="row product-grid-4">
 
-
-                            
-
     @foreach($products as $product)
-
-
-
-
     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
             <div class="product-img-action-wrap">
@@ -71,7 +63,7 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="shop-grid-right.html">{{$product['category']['category_name']}}</a>
+                    <a href="shop-grid-right.html">{{ $product['category']['category_name'] }}</a>
                 </div>
                 <h2><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"> {{ $product->product_name }} </a></h2>
 @php
@@ -104,17 +96,15 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
 
 
                 <div>
+                    @if($product->vendor_id == NULL)
+<span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
+                    @else
+  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
+
+                    @endif
+                   
 
 
- @if($product->vendor_id == NULL)
- <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
- @else
- <span class="font-small text-muted">By <a href="vendor-details-1.html">{{$product['vendor']['name']}}</a></span>
- @endif
-
-
-
-                    
                 </div>
                 <div class="product-card-bottom">
 
@@ -162,18 +152,7 @@ $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderB
 @endphp
         
         @forelse($catwiseProduct as $product)
-
-
-
-
-
-
-
-
-
-
-      
-    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
             <div class="product-img-action-wrap">
                 <div class="product-img product-img-zoom">
@@ -183,13 +162,10 @@ $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderB
                     </a>
                 </div>
                 <div class="product-action-1">
+                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
 
- <a aria-label="Add To Wishlist" class="action-btn" id="{{ $product->id }}" onclick="addToWishList(this.id)"  ><i class="fi-rs-heart"></i></a>
-                    
-   <a aria-label="Compare" class="action-btn"  id="{{ $product->id }}" onclick="addToCompare(this.id)"><i class="fi-rs-shuffle"></i></a>
-
-   <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $product->id }}" onclick="productView(this.id)" ><i class="fi-rs-eye"></i></a>
-                     
+  <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $product->id }}" onclick="productView(this.id)"><i class="fi-rs-eye"></i></a>
                 </div>
 
     @php
@@ -212,50 +188,25 @@ $catwiseProduct = App\Models\Product::where('category_id',$category->id)->orderB
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="shop-grid-right.html">{{$product['category']['category_name']}}</a>
+                    <a href="shop-grid-right.html">{{ $product['category']['category_name'] }}</a>
                 </div>
                 <h2><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"> {{ $product->product_name }} </a></h2>
-@php
-
-$reviewcount = App\Models\Review::where('product_id',$product->id)->where('status',1)->latest()->get();
-
-$avarage = App\Models\Review::where('product_id',$product->id)->where('status',1)->avg('rating');
-@endphp
-
                 <div class="product-rate-cover">
                     <div class="product-rate d-inline-block">
-
-                          @if($avarage == 0)
-      
-       @elseif($avarage == 1 || $avarage < 2)                     
-    <div class="product-rating" style="width: 20%"></div>
-       @elseif($avarage == 2 || $avarage < 3)                     
-    <div class="product-rating" style="width: 40%"></div>
-       @elseif($avarage == 3 || $avarage < 4)                     
-    <div class="product-rating" style="width: 60%"></div>
-       @elseif($avarage == 4 || $avarage < 5)                     
-    <div class="product-rating" style="width: 80%"></div>
-       @elseif($avarage == 5 || $avarage < 5)                     
-    <div class="product-rating" style="width: 100%"></div>
-    @endif
+                        <div class="product-rating" style="width: 90%"></div>
                     </div>
-                    <span class="font-small ml-5 text-muted"> ({{count($reviewcount)}})</span>
+                    <span class="font-small ml-5 text-muted"> (4.0)</span>
                 </div>
-
-
-
                 <div>
+                    @if($product->vendor_id == NULL)
+<span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
+                    @else
+  <span class="font-small text-muted">By <a href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
+
+                    @endif
+                   
 
 
- @if($product->vendor_id == NULL)
- <span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>
- @else
- <span class="font-small text-muted">By <a href="vendor-details-1.html">{{$product['vendor']['name']}}</a></span>
- @endif
-
-
-
-                    
                 </div>
                 <div class="product-card-bottom">
 
@@ -298,8 +249,6 @@ $avarage = App\Models\Review::where('product_id',$product->id)->where('status',1
                     </div>
                     <!--En tab two-->
                     @endforeach
-
-
                
                 
                 </div>

@@ -19,3 +19,4 @@ class Review extends Model
     }
 
 }
+ 

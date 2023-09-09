@@ -54,19 +54,18 @@
                 </div>
             </div>
         </div>
-
      
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="" alt="logo" /></a>
+                        <a href="index.html"><img src="#" alt="logo" /></a>
                     </div>
     <div class="header-right">
         <div class="search-style-2">
             
-            <form action="#" method="post">
-                
+            <form action="{{ route('product.search') }}" method="post">
+                @csrf
 
                 <select class="select-active">
                     <option>All Categories</option>
@@ -109,21 +108,19 @@
                 </div>
                
      <div class="header-action-icon-2">
-        <a href="#">
-            <img class="svgInject" alt="Nest" src="#" />
+        <a href="{{ route('compare') }}">
+            <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-compare.svg')}}" />
         </a>
-        <a href="#"><span class="lable ml-0">Compare</span></a>
+        <a href="{{ route('compare') }}"><span class="lable ml-0">Compare</span></a>
     </div>
 
-    
-
-   <div class="header-action-icon-2">
-        <a href="{{ route('wishlist') }}">
-            <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
-            <span class="pro-count blue" id="wishQty">0 </span>
-        </a>
-        <a href="{{ route('wishlist') }}"><span class="lable">Wishlist</span></a>
-    </div>
+                <div class="header-action-icon-2">
+                    <a href="{{ route('wishlist') }}">
+                        <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
+                        <span class="pro-count blue" id="wishQty">0 </span>
+                    </a>
+                    <a href="{{ route('wishlist') }}"><span class="lable">Wishlist</span></a>
+                </div>
 
 
 
@@ -133,7 +130,7 @@
                         <img alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
                         <span class="pro-count blue" id="cartQty">0</span>
                     </a>
-                    <a href="#"><span class="lable">Cart</span></a>
+                    <a href="{{ route('mycart') }}"><span class="lable">Cart</span></a>
                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                         
 
@@ -191,7 +188,7 @@
                     <a href="{{ route('dashboard') }}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                 </li>
                 <li>
-                    <a href="{{route('user.logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                    <a href="{{ route('user.logout') }}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
                 </li>
             </ul>
                                     </div>
@@ -217,7 +214,10 @@
             </div>
         </div>
 
-   
+
+
+
+
         @php
 
     $categories = App\Models\Category::orderBy('category_name','ASC')->get();
@@ -290,7 +290,7 @@
                             
                         </li>
     
-         @php
+        @php
 
     $categories = App\Models\Category::orderBy('category_name','ASC')->limit(5)->get();
         @endphp
@@ -314,10 +314,10 @@
 
                          
                <li>
-                    <a href="">Blog</a>
+                    <a href="{{ route('home.blog') }}">Blog</a>
                 </li>
                  <li>
-                    <a href="">Shop</a>
+                    <a href="{{ route('shop.page') }}">Shop</a>
                 </li>
             </ul>
         </nav>
@@ -327,7 +327,7 @@
 
 <div class="hotline d-none d-lg-flex">
     <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-headphone.svg') }}" alt="hotline" />
-    <p><span>24/7 Support Center</span></p>
+    <p>#<span>24/7 Support Center</span></p>
 </div>
 <div class="header-action-icon-2 d-block d-lg-none">
     <div class="burger-icon burger-icon-white">
@@ -357,7 +357,7 @@
                         </div>
                         <div class="shopping-cart-title">
                             <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
-                            <h3><span>1 × </span></h3>
+                            <h3><span>1 × </span>$800.00</h3>
                         </div>
                         <div class="shopping-cart-delete">
                             <a href="#"><i class="fi-rs-cross-small"></i></a>
@@ -378,7 +378,7 @@
                 </ul>
                 <div class="shopping-cart-footer">
                     <div class="shopping-cart-total">
-                        <h4>Total <span></span></h4>
+                        <h4>Total <span>$383.00</span></h4>
                     </div>
                     <div class="shopping-cart-button">
                         <a href="shop-cart.html">View cart</a>

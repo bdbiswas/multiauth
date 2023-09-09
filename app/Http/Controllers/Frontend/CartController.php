@@ -16,6 +16,8 @@ class CartController extends Controller
 {
     public function AddToCart(Request $request, $id){
 
+        if (Auth::check()) {
+
         if(Session::has('coupon')){
             Session::forget('coupon');
         }
@@ -62,6 +64,15 @@ class CartController extends Controller
    return response()->json(['success' => 'Successfully Added on Your Cart' ]);
 
         }
+
+
+        
+    }
+
+    else{
+            return response()->json(['error' => 'At First Login Your Account' ]);
+        }
+
 
     }// End Method
 

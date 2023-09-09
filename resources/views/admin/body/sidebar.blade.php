@@ -145,10 +145,10 @@
           </a>
           <ul>
 
-            <li> <a href=""><i class="bx bx-right-arrow-alt"></i>All Coupon</a>
+            <li> <a href="{{ route('all.coupon') }}"><i class="bx bx-right-arrow-alt"></i>All Coupon</a>
             </li>
 
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Add Coupon</a>
+            <li> <a href="{{ route('add.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Add Coupon</a>
             </li>
 
 
@@ -162,12 +162,13 @@
             <div class="menu-title">Shipping Area </div>
           </a>
           <ul>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>All Division</a>
+
+            <li> <a href="{{ route('all.division') }}"><i class="bx bx-right-arrow-alt"></i>All Division</a>
             </li>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>All District</a>
+            <li> <a href="{{ route('all.district') }}"><i class="bx bx-right-arrow-alt"></i>All District</a>
             </li>
 
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>All State</a>
+            <li> <a href="{{ route('all.state') }}"><i class="bx bx-right-arrow-alt"></i>All State</a>
             </li>
 
           </ul>
@@ -197,13 +198,13 @@
             <div class="menu-title">Order Manage </div>
           </a>
           <ul>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Pending Order</a>
+            <li> <a href="{{ route('pending.order') }}"><i class="bx bx-right-arrow-alt"></i>Pending Order</a>
             </li>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Confirmed Order</a>
+            <li> <a href="{{ route('admin.confirmed.order') }}"><i class="bx bx-right-arrow-alt"></i>Confirmed Order</a>
             </li>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Processing Order</a>
+            <li> <a href="{{ route('admin.processing.order') }}"><i class="bx bx-right-arrow-alt"></i>Processing Order</a>
             </li>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Delivered Order</a>
+            <li> <a href="{{ route('admin.delivered.order') }}"><i class="bx bx-right-arrow-alt"></i>Delivered Order</a>
             </li>
 
 
@@ -211,18 +212,22 @@
           </ul>
         </li>
 
-        <li>
-          <a href="javascript:;" class="has-arrow">
-            <div class="parent-icon"><i class='lni lni-paperclip'></i>
-            </div>
-            <div class="menu-title">Return Order </div>
-          </a>
-          <ul>
-            <li> <a href="#"><i class="bx bx-right-arrow-alt"></i>Return Request</a>
-            </li>
 
-          </ul>
-        </li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='lni lni-paperclip'></i>
+						</div>
+						<div class="menu-title">Return Order </div>
+					</a>
+					<ul>
+						<li> <a href="{{ route('return.request') }}"><i class="bx bx-right-arrow-alt"></i>Return Request</a>
+						</li>
+						<li> <a href="{{ route('complete.return.request') }}"><i class="bx bx-right-arrow-alt"></i>Complete Request</a>
+						</li>
+					</ul>
+				</li>
+
 
   <li>
           <a href="javascript:;" class="has-arrow">
