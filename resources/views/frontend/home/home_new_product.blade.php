@@ -1,6 +1,6 @@
      @php 
     $products = App\Models\Product::where('status',1)->orderBy('id','ASC')->limit(10)->get();
-    $categories = App\Models\Category::orderBy('category_name','ASC')->get();
+    $categories = App\Models\Category::orderBy('category_name','ASC')->limit(8)->get();
     @endphp
 
         <section class="product-tabs section-padding position-relative">

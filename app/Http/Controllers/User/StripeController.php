@@ -23,10 +23,10 @@ class StripeController extends Controller
         if(Session::has('coupon')){
             $total_amount = Session::get('coupon')['total_amount'];
         }else{
-            $total_amount = round((float)(Cart::total()));
+            $total_amount = round(Cart::total());
         }
 
-        \Stripe\Stripe::setApiKey('sk_test_51NPWNSJGs6SVKorQceSgnB76UpeUnwLe76I1gw5BAqieIUyUzRiddZziHbwpXK4hi8ZulcobHFt0qLVlCwkMkymd0095aHotOe');
+        \Stripe\Stripe::setApiKey('sk_test_51IUTWzALc6pn5BvMjaRW9STAvY4pLiq1dNViHoh5KtqJc9Bx7d4WKlCcEdHOJdg3gCcC2F19cDxUmCBJekGSZXte00RN2Fc4vm');
 
  
         $token = $_POST['stripeToken'];
@@ -34,7 +34,7 @@ class StripeController extends Controller
         $charge = \Stripe\Charge::create([
           'amount' => $total_amount*100,
           'currency' => 'usd',
-          'description' => 'bdbiswas',
+          'description' => 'Easy Mulit Vendor Shop',
           'source' => $token,
           'metadata' => ['order_id' => uniqid()],
         ]);

@@ -25,7 +25,7 @@
                 <div class="card-body row">
                     <div class="col"> <strong>Order Date:</strong> <br>{{ $track->order_date }} </div>
 
-     <div class="col"> <strong>Shipping BY:</strong> <br> {{ $track->name }} | <i class="fa fa-phone"></i>{{ $track->phone }} / {{ $track->division->division_name }} / {{ $track->district->district_name }}   </div>
+     <div class="col"> <strong>Shipping BY:</strong> <br> {{ $track->name }} | <i class="fa fa-phone"></i>{{ $track->phone }} / {{ $track->division_name }} / {{ $track->district_name }}   </div>
 
      <div class="col"> <strong>Payment Method:</strong> <br>{{ $track->payment_method }} </div>
 

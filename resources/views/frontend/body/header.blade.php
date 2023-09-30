@@ -12,7 +12,7 @@
                                 
                                 <li><a href="page-account.html">My Cart</a></li>
                                 <li><a href="shop-wishlist.html">Checkout</a></li>
-                                <li><a href="shop-order.html">Order Tracking</a></li>
+                                <li><a href="http://127.0.0.1:8000/user/track/order">Order Tracking</a></li>
                             </ul>
                         </div>
                     </div>
@@ -54,12 +54,14 @@
                 </div>
             </div>
         </div>
-     
+        @php
+$setting = App\Models\SiteSetting::find(1);
+        @endphp
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="#" alt="logo" /></a>
+                        <a href="http://127.0.0.1:8000/"><img src="{{ asset($setting->logo)   }}" alt="logo" /></a>
                     </div>
     <div class="header-right">
         <div class="search-style-2">
@@ -69,11 +71,11 @@
 
                 <select class="select-active">
                     <option>All Categories</option>
-                    <option>Milks and Dairies</option>
-                    <option>Wines & Alcohol</option>
-                    <option>Clothing & Beauty</option>
-                    <option>Pet Foods & Toy</option>
-                    <option>Fast food</option>
+                    <option>Fashion</option>
+                    <option>Electronics</option>
+                    <option>Clothing</option>
+                    <option>Beauty</option>
+                    <option>Men's Clothing</option>
                     <option>Baking material</option>
                     <option>Vegetables</option>
                     <option>Fresh Seafood</option>
@@ -240,18 +242,20 @@
     <div class="d-flex categori-dropdown-inner">
         <ul>
             @foreach($categories as $item)
-                @if($loop->index < 5)
+                @if($loop->index <5)
             <li>
-                <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset( $item->category_image ) }}" alt="" /> {{ $item->category_name }} </a>
+                <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset( $item->category_image ) }}" alt="" /> {{$item->category_name}} </a>
             </li>
             @endif
+
            @endforeach
         </ul>
+
         <ul class="end">
              @foreach($categories as $item)
-             @if($loop->index > 4)
+             @if($loop->index < 5)
             <li>
-                <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset( $item->category_image ) }}" alt="" /> {{ $item->category_name }} </a>
+                <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset( $item->category_image ) }}" alt="" />{{$item->category_name}} </a>
             </li>
               @endif
            @endforeach
@@ -327,7 +331,7 @@
 
 <div class="hotline d-none d-lg-flex">
     <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-headphone.svg') }}" alt="hotline" />
-    <p>#<span>24/7 Support Center</span></p>
+    <p>{{ $setting->support_phone }}<span>24/7 Support Center</span></p>
 </div>
 <div class="header-action-icon-2 d-block d-lg-none">
     <div class="burger-icon burger-icon-white">

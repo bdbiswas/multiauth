@@ -51,17 +51,17 @@
 
                     <tr>
                         <th>Division:</th>
-                       <th>{{ $order->division->division_name }}</th>
+                       <th>{{ $order->division_name }}</th>
                     </tr>
 
                     <tr>
                         <th>District:</th>
-                       <th>{{ $order->district->district_name }}</th>
+                       <th>{{ $order->district_name }}</th>
                     </tr>
 
                     <tr>
                         <th>State :</th>
-                         <th>{{ $order->state->state_name }}</th>
+                         <th>{{ $order->state_name }}</th>
                     </tr>
 
                      <tr>

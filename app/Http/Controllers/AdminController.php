@@ -4,24 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission; 
 
+use App\Notifications\VendorApproveNotification;
+use Illuminate\Support\Facades\Notification;
+         
 class AdminController extends Controller
-
-
 {
+    public function AdminDashboard(){
 
-    public function AdminDashboard()
-
-    {
         return view('admin.index');
 
-    }//end method
+    } // End Mehtod 
 
-     public function AdminDestroy(Request $request)
-    {
+
+    public function AdminLogin(){
+        return view('admin.admin_login');
+    } // End Mehtod 
+
+
+public function AdminDestroy(Request $request){
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
@@ -29,40 +34,31 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/admin/login');
-    }//end method
+    } // End Mehtod 
 
 
-    public function AdminLogin()
-    {
-        return view('admin.admin_login');
-    }//end method
+    public function AdminProfile(){
 
-
-
-    public function AdminProfile()
-
-    {
         $id = Auth::user()->id;
         $adminData = User::find($id);
         return view('admin.admin_profile_view',compact('adminData'));
-    }//end method
 
+    } // End Mehtod 
 
+    public function AdminProfileStore(Request $request){
 
-    public function AdminProfileStore(Request $request)
-
-    {
         $id = Auth::user()->id;
         $data = User::find($id);
         $data->name = $request->name;
-        $data->email = $request->email; 
+        $data->email = $request->email;
         $data->phone = $request->phone;
-        $data->address = $request->address;
+        $data->address = $request->address; 
 
-        if ($request->file('photo')){
+
+        if ($request->file('photo')) {
             $file = $request->file('photo');
             @unlink(public_path('upload/admin_images/'.$data->photo));
-            $filename = date('ymdHi').$file->getClientOriginalName();
+            $filename = date('YmdHi').$file->getClientOriginalName();
             $file->move(public_path('upload/admin_images'),$filename);
             $data['photo'] = $filename;
         }
@@ -76,15 +72,12 @@ class AdminController extends Controller
 
         return redirect()->back()->with($notification);
 
-    }//end method
+    } // End Mehtod 
 
 
-    public function AdminChangePassword()
-    {
+    public function AdminChangePassword(){
         return view('admin.admin_change_password');
-
-    }//end method
-
+    } // End Mehtod 
 
 
     public function AdminUpdatePassword(Request $request){
@@ -110,7 +103,7 @@ class AdminController extends Controller
 
 
 
-      public function InactiveVendor(){
+    public function InactiveVendor(){
         $inActiveVendor = User::where('status','inactive')->where('role','vendor')->latest()->get();
         return view('backend.vendor.inactive_vendor',compact('inActiveVendor'));
 
@@ -144,8 +137,8 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
 
-        
-        
+         $vuser = User::where('role','vendor')->get();
+        Notification::send($vuser, new VendorApproveNotification($request));
         return redirect()->route('active.vendor')->with($notification);
 
     }// End Mehtod 
@@ -175,8 +168,108 @@ class AdminController extends Controller
 
     }// End Mehtod 
 
+ 
+     ///////////// Admin All Method //////////////
+
+
+    public function AllAdmin(){
+        $alladminuser = User::where('role','admin')->latest()->get();
+        return view('backend.admin.all_admin',compact('alladminuser'));
+    }// End Mehtod 
+
+
+    public function AddAdmin(){
+        $roles = Role::all();
+        return view('backend.admin.add_admin',compact('roles'));
+    }// End Mehtod 
+
+
+
+    public function AdminUserStore(Request $request){
+
+        $user = new User();
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->role = 'admin';
+        $user->status = 'active';
+        $user->save();
+
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+         $notification = array(
+            'message' => 'New Admin User Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.admin')->with($notification);
+
+    }// End Mehtod 
+
+
+
+
+    public function EditAdminRole($id){
+
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+        return view('backend.admin.edit_admin',compact('user','roles'));
+    }// End Mehtod 
+
+
+    public function AdminUserUpdate(Request $request,$id){
+
+
+        $user = User::findOrFail($id);
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address; 
+        $user->role = 'admin';
+        $user->status = 'active';
+        $user->save();
+
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+         $notification = array(
+            'message' => 'New Admin User Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.admin')->with($notification);
+
+    }// End Mehtod 
+
+
+    public function DeleteAdminRole($id){
+
+        $user = User::findOrFail($id);
+        if (!is_null($user)) {
+            $user->delete();
+        }
+ 
+         $notification = array(
+            'message' => 'Admin User Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+    }// End Mehtod 
+
+
 
 
 
 
 }
+ 

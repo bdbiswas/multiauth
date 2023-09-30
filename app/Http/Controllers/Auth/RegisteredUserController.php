@@ -41,7 +41,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
- 
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
          $nuser = User::where('role','admin')->get();
-        // Notification::send($nuser, new RegisterUserNotification($request));
+         Notification::send($nuser, new RegisterUserNotification($request));
         return redirect(RouteServiceProvider::HOME);
     }
 }

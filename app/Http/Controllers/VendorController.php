@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
  
-
+use App\Notifications\VendorRegNotification;
 use Illuminate\Support\Facades\Notification;
 
  
@@ -106,15 +106,16 @@ public function VendorUpdatePassword(Request $request){
 
     } // End Mehtod 
 
-     public function BecomeVendor(){
-        return view('auth.become_vendor');
 
+
+    public function BecomeVendor(){
+        return view('auth.become_vendor');
     } // End Mehtod 
 
 
-     public function VendorRegister(Request $request) {
+      public function VendorRegister(Request $request) {
        
-        
+        $vuser = User::where('role','admin')->get();
 
 
         $request->validate([
@@ -139,8 +140,7 @@ public function VendorUpdatePassword(Request $request){
             'alert-type' => 'success'
         );
 
-         
-       
+       Notification::send($vuser, new VendorRegNotification($request));
         return redirect()->route('vendor.login')->with($notification);
        
     }// End Mehtod 
@@ -148,7 +148,5 @@ public function VendorUpdatePassword(Request $request){
 
 
 
-
-
-
 }
+ 
