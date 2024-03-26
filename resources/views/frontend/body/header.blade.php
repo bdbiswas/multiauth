@@ -10,9 +10,9 @@
                         <div class="header-info">
                             <ul>
                                 
-                                <li><a href="page-account.html">My Cart</a></li>
-                                <li><a href="shop-wishlist.html">Checkout</a></li>
-                                <li><a href="http://127.0.0.1:8000/user/track/order">Order Tracking</a></li>
+                                <li><a href="{{ route('mycart') }}">My Cart</a></li>
+                                <li><a href="{{ route('checkout') }}">Checkout</a></li>
+                                <li><a href="{{ route('user.track.order') }}">Order Tracking</a></li>
                             </ul>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                     </ul>
                 </li>
 
-                 <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
+                 <li>Need help? Call Us: <strong class="text-brand"> +39 39288 58055</strong></li>
                                
                             </ul>
                         </div>
@@ -128,7 +128,7 @@ $setting = App\Models\SiteSetting::find(1);
 
 
                 <div class="header-action-icon-2">
-                    <a class="mini-cart-icon" href="shop-cart.html">
+                    <a class="mini-cart-icon" href="{{ route('mycart') }}">
                         <img alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
                         <span class="pro-count blue" id="cartQty">0</span>
                     </a>
@@ -152,8 +152,8 @@ $setting = App\Models\SiteSetting::find(1);
                                 <h4>Total <span id="cartSubTotal"> </span></h4>
                             </div>
                             <div class="shopping-cart-button">
-                                <a href="shop-cart.html" class="outline">View cart</a>
-                                <a href="shop-checkout.html">Checkout</a>
+                                <a href="{{ route('mycart') }}" class="outline">View cart</a>
+                                <a href="{{ route('checkout') }}">Checkout</a>
                             </div>
                                         </div>
                                     </div>
@@ -230,7 +230,7 @@ $setting = App\Models\SiteSetting::find(1);
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                         <a href="http:/ "><img src="{{ asset($setting->logo)   }}" alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -296,7 +296,7 @@ $setting = App\Models\SiteSetting::find(1);
     
         @php
 
-    $categories = App\Models\Category::orderBy('category_name','ASC')->limit(5)->get();
+    $categories = App\Models\Category::orderBy('category_name','ASC')->limit(4)->get();
         @endphp
 
        @foreach($categories as $category)    
@@ -385,8 +385,8 @@ $setting = App\Models\SiteSetting::find(1);
                         <h4>Total <span>$383.00</span></h4>
                     </div>
                     <div class="shopping-cart-button">
-                        <a href="shop-cart.html">View cart</a>
-                        <a href="shop-checkout.html">Checkout</a>
+                        <a href="{{ route('mycart') }}">View cart</a>
+                        <a href="{{ route('checkout') }}">Checkout</a>
                     </div>
                 </div>
             </div>
@@ -428,7 +428,7 @@ $setting = App\Models\SiteSetting::find(1);
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                     <a href="http://127.0.0.1:8000/"><img src="{{ asset($setting->logo)   }}" alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
